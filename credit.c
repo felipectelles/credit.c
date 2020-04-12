@@ -41,14 +41,14 @@ int check_luhn(long card)
         // Check even or odd number
         if (digitPos % 2 == 0)
         {
-            // Even (par)
+            // Even
             int produto = lDigit * 2;
             int resultado = produto > 9 ? produto - 9 : produto;
             s2 = s2 + resultado;
         }
         else
         {
-            // Odd (impar)
+            // Odd
             s1 += lDigit;
         }
         // Take it the first two digits

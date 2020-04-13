@@ -8,13 +8,14 @@ void is_valid(long);
 int main(void)
 {
     long card;
-    int result = 0;
-    // Prompts the user for a number (long)
-    card = get_long("Enter a credit card number: ");
-    if (card > 1000000000000 && card < 9999999999999999)
+     // Prompts the user for a number (long)
+    do
     {
-        result = check_luhn(card);
+        card = get_long("Number: ");
     }
+    while (card < 1 || card > 9999999999999999);
+    
+    int result = check_luhn(card);
     is_valid(result);
 }
 
@@ -29,6 +30,10 @@ int check_luhn(long card)
     // invalid example
     // card = 88003600000000014;
     int nDigits = count_digits(card);
+    if (nDigits < 13)
+    {
+        return 0;
+    }
     int lDigit = 0;
     int result = 0;
     int s1 = 0;
@@ -41,14 +46,14 @@ int check_luhn(long card)
         // Check even or odd number
         if (digitPos % 2 == 0)
         {
-            // Even
+            // Even (par)
             int produto = lDigit * 2;
             int resultado = produto > 9 ? produto - 9 : produto;
             s2 = s2 + resultado;
         }
         else
         {
-            // Odd
+            // Odd (impar)
             s1 += lDigit;
         }
         // Take it the first two digits
